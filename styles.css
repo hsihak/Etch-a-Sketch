@@ -1,0 +1,29 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  display: grid;
+  justify-items: center;
+  align-items: center;
+}
+
+:root {
+  --grid-rows: 1;
+  --grid-cols: 1;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(var(--grid-cols), 1fr);
+  grid-template-rows: repeat(var(--grid-rows), 1fr);
+  max-width: 50vw;
+  max-height: 50vw;
+}
+
+.grid-square {
+  padding: 10px;
+  border: 1px solid black;
+}
