@@ -25,6 +25,9 @@ function requestUserData () {
 requestUserData();
 
 
+// Listen for mouseenter and hold any of the grid
+gridContainer.addEventListener('mouseover', (e) => e.target.style.backgroundColor = 'purple');
+
 
 
 
