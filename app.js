@@ -1,9 +1,13 @@
 // Create a webpage with a 16x16 grid of square divs
 
 // Create a container Div to store grid-square div
+const mainContainer = document.createElement('div');
+mainContainer.className = 'main-container';
+document.body.appendChild(mainContainer);
+
 const gridContainer = document.createElement('div');
 gridContainer.className = 'grid-container';
-document.body.appendChild(gridContainer);
+mainContainer.appendChild(gridContainer);
 
 // Create a div using JavaScript
 function createGrids (rows, cols) {
@@ -24,8 +28,9 @@ function requestUserData () {
 
 requestUserData();
 
-
 // Listen for mouseenter and hold any of the grid
+const gridItems = document.querySelector('.grid-square');
+
 gridContainer.addEventListener('mouseover', (e) => e.target.style.backgroundColor = 'purple');
 
 
