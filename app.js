@@ -29,9 +29,30 @@ function requestUserData () {
 requestUserData();
 
 // Listen for mouseenter and hold any of the grid
-const gridItems = document.querySelector('.grid-square');
+// const gridItems = document.querySelector('.grid-square');
 
 gridContainer.addEventListener('mouseover', (e) => e.target.style.backgroundColor = 'purple');
+
+
+// When clear button is clicked
+// Remove existing grid with backgroundColor
+// Create a toolDiv
+const toolContainer = document.createElement('div');
+toolContainer.className = 'tool-container';
+mainContainer.insertAdjacentElement('afterend', toolContainer);
+
+// Create a clearButton
+const clearButton = document.createElement('button');
+clearButton.className = 'clear-button';
+clearButton.textContent = 'Clear';
+toolContainer.appendChild(clearButton);
+// Get the gridItems Div
+
+// Get the gridSquare Div
+const gridItems = document.querySelectorAll('.grid-square');
+// Check the div that contain style with backgroundColor Attribute
+// Remove all of them
+clearButton.addEventListener('click', () => gridItems.forEach(grid => grid.removeAttribute('style')));
 
 
 

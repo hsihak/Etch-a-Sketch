@@ -46,3 +46,21 @@ h1 {
   padding: 0, var(--grid-rows);
   border: 1px solid gray;
 }
+
+.tool-container {
+  display: flex;
+  justify-content: center;
+}
+
+.clear-button {
+  padding: 6px 16px;
+  font-size: 1.3rem;
+  border-radius: 12px;
+  border-style: none;
+  cursor: pointer;
+}
+
+.clear-button:hover {
+  background-color: rgb(143, 26, 143);
+  color: #fff;
+}
