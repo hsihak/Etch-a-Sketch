@@ -54,6 +54,27 @@ const gridItems = document.querySelectorAll('.grid-square');
 // Remove all of them
 clearButton.addEventListener('click', () => gridItems.forEach(grid => grid.removeAttribute('style')));
 
+// Create a grid slider button 
+const sliderContainer = document.createElement('div');
+sliderContainer.className = 'slider-container';
+mainContainer.insertAdjacentElement('afterbegin', sliderContainer);
+
+const sliderInput = document.createElement('input');
+sliderInput.type = 'range';
+sliderInput.min = '8';
+sliderInput.max = '64';
+sliderInput.value = '16';
+sliderContainer.appendChild(sliderInput);
+//Create a para to display slider value
+const sliderValue = document.createElement('h3');
+
+
+sliderInput.addEventListener('mouseout', () =>  sliderValue.textContent = `${sliderInput.value} x ${sliderInput.value}`);
+sliderInput.insertAdjacentElement("afterend", sliderValue);
+// Create an RGB picker
+
+// Create a Black and white button
+
 
 
 

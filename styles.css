@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Oleo+Script:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap');
 
 * {
   margin: 0;
@@ -8,6 +9,7 @@
 
 body {
   background: linear-gradient(#e66465, #9198e5, #e66465);
+  font-family: 'Poppins', sans-serif;
 }
 
 h1 {
@@ -21,7 +23,7 @@ h1 {
 
 .main-container {
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
   padding: 80px 0;
   margin: 0 10px;
@@ -63,4 +65,8 @@ h1 {
 .clear-button:hover {
   background-color: rgb(143, 26, 143);
   color: #fff;
+}
+
+.slider-container > h3 {
+  text-align: center;
 }
