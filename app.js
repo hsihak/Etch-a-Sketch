@@ -29,28 +29,51 @@ function createGrids (value) {
 
 // Create sliderInput button
 const sliderInput = document.createElement('input');
-sliderInput.type = 'range';
-sliderInput.min = '8';
-sliderInput.max = '64';
-sliderInput.value = '16';
-sliderContainer.append(sliderInput);
+
 //Create a para to display slider value
 const sliderValue = document.createElement('h3');
-sliderValue.textContent = `${sliderInput.value} x ${sliderInput.value}`;
 
-sliderInput.insertAdjacentElement("afterend", sliderValue);
-sliderInput.addEventListener('change', () =>  sliderValue.textContent = `${sliderInput.value} x ${sliderInput.value}`);
+// sliderInput Fn
+function setSliderInput () {
+    sliderInput.type = 'range';
+    sliderInput.min = '8';
+    sliderInput.max = '64';
+    sliderInput.value = '16';
+    sliderContainer.append(sliderInput);
+    sliderInput.insertAdjacentElement("afterend", sliderValue);
+    sliderValue.textContent = `${sliderInput.value} x ${sliderInput.value}`;
+}
 
-function requestUserData () {
+
+// Intial Start Fn
+function defaultValue () {
+    setSliderInput();
     createGrids(sliderInput.value);
 }
 
-requestUserData();
+defaultValue();
+
+// Clear Existing Grid when Slider Change
+function clearGridSquare (){
+    const gridSquare = document.querySelectorAll('.grid-square');
+    gridSquare.forEach(grid => {
+        grid.remove();
+    });
+}
+
+// listenForSlider Fn
+function listenForSlider () {
+    sliderValue.textContent = `${sliderInput.value} x ${sliderInput.value}`;
+    clearGridSquare();
+    createGrids(sliderInput.value);
+}
+
+sliderInput.addEventListener('change', listenForSlider);
 
 // Listen for mouseenter and hold any of the grid
 // const gridItems = document.querySelector('.grid-square');
 
-gridContainer.addEventListener('mouseover', (e) => e.target.style.backgroundColor = 'purple');
+gridContainer.addEventListener('mouseover', (e) => e.target.style.backgroundColor = createRGB.value);
 
 // When clear button is clicked
 // Remove existing grid with backgroundColor
@@ -66,18 +89,25 @@ clearButton.textContent = 'Clear';
 toolContainer.appendChild(clearButton);
 
 // Get the gridSquare Div
-const gridItems = document.querySelectorAll('.grid-square');
+function gridItems () {
+    const gridItems = document.querySelectorAll('.grid-square');
+    gridItems.forEach(grid => grid.removeAttribute('style'))
+}
+
+clearButton.addEventListener('click', gridItems );
 // Check the div that contain style with backgroundColor Attribute
 // Remove all of them
-clearButton.addEventListener('click', () => gridItems.forEach(grid => grid.removeAttribute('style')));
+
 
 // Create an RGB picker
 const createLabel = document.createElement('label');
+const createRGB = document.createElement('input');
+
+// setRGB Attributes
 createLabel.setAttribute('for', 'rgbPicker');
 sliderContainer.insertAdjacentElement('beforeend', createLabel);
-const createRGB = document.createElement('input');
 createRGB.setAttribute('type', 'color');
-createRGB.setAttribute('value', '#ff0000');
+createRGB.setAttribute('value', '#A020F0');
 createRGB.setAttribute ('id', 'rgbPicker');
 createRGB.setAttribute('name', 'rgbPicker')
 createLabel.textContent = 'RGB Color: '
