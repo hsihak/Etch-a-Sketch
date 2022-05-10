@@ -23,10 +23,12 @@ h1 {
 
 .main-container {
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
+  column-gap: 2rem;
   padding: 80px 0;
   margin: 0 10px;
+  flex-wrap: wrap;
 }
 
 :root {
@@ -67,6 +69,22 @@ h1 {
   color: #fff;
 }
 
+.slider-container {
+  max-width: var(--grid-cols);
+  max-height: var(--grid-rows);
+  border: 1px solid black;
+  padding: 20px;
+}
+
 .slider-container > h3 {
   text-align: center;
+  font-weight: 200;
+}
+
+#rgbPicker {
+  margin-top: 10px;
+}
+
+label {
+  font-weight: 600;
 }
