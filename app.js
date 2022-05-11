@@ -1,5 +1,8 @@
 // Create a webpage with a 16x16 grid of square divs
 
+// Create titlePage h1
+const titlePage = document.createElement('h1');
+
 // Create a container Div to store grid-square div
 const mainContainer = document.createElement('div');
 
@@ -9,11 +12,12 @@ const gridContainer = document.createElement('div');
 // Create sliderContainer Div
 const sliderContainer = document.createElement('div');
 
-const makeRGBButton = document.createElement('button');
-
 // Create an RGB picker
 const createLabel = document.createElement('label');
 const createRGB = document.createElement('input');
+
+// Create RGB (Rainbow) button
+const makeRGBButton = document.createElement('button');
 
 // set RGB container
 const rgbContainer = document.createElement('div');
@@ -26,6 +30,9 @@ const sliderValue = document.createElement('h3');
 
 // Create a clearButton
 const clearButton = document.createElement('button');
+
+// Create footer 
+const footer = document.createElement('footer');
 
 // Set RGB Button
 function setRBGButton () {
@@ -91,6 +98,12 @@ function setContainersAttribute () {
     mainContainer.insertAdjacentElement('afterbegin', sliderContainer);
 }
 
+// Set titlePage h1 Fn
+function setTitlePage () {
+    titlePage.textContent = 'MAGIC Etch a Sketch SCREEN';
+    mainContainer.insertAdjacentElement('afterbegin', titlePage);
+}
+
 // Create a div using JavaScript
 function createGrids (value) {
     gridContainer.style.setProperty('--grid-rows', value);
@@ -102,14 +115,23 @@ function createGrids (value) {
     }
 }
 
+// Set Footer note Fn
+function setFooter () {
+    const footerPara = document.createElement('p');
+    footerPara.textContent = 'The Odin Project © Made with ❤️ by Hangsihak Sin';
+    footer.appendChild(footerPara);
+    document.body.insertAdjacentElement('beforeend', footer);
+}
+
 // Intial Start Fn with Immediately Invoked function expression (IIFE)
 const defaultValue = (function () {
-    setRGB();
+    setTitlePage();
     setContainersAttribute();
     setSliderInput();
     setRGB();
     createGrids(sliderInput.value);
     createRGBButton();
+    setFooter();
 }) ();
 
 // Clear Existing Grid when Slider Change
@@ -144,13 +166,10 @@ const toolContainer = document.createElement('div');
 toolContainer.className = 'tool-container';
 mainContainer.insertAdjacentElement('afterend', toolContainer);
 
-
 // Assign class and text content to Clear Button
 clearButton.className = 'clear-button';
 clearButton.textContent = 'Clear';
 toolContainer.appendChild(clearButton);
-
-
 
 // Click on RGB color
 // get the picked color
