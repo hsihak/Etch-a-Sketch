@@ -2,19 +2,94 @@
 
 // Create a container Div to store grid-square div
 const mainContainer = document.createElement('div');
-mainContainer.className = 'main-container';
-document.body.appendChild(mainContainer);
 
 // Create gridContainer Div
 const gridContainer = document.createElement('div');
-gridContainer.className = 'grid-container';
-mainContainer.appendChild(gridContainer);
 
 // Create sliderContainer Div
 const sliderContainer = document.createElement('div');
-sliderContainer.className = 'slider-container';
-mainContainer.insertAdjacentElement('afterbegin', sliderContainer);
 
+const makeRGBButton = document.createElement('button');
+
+// Create an RGB picker
+const createLabel = document.createElement('label');
+const createRGB = document.createElement('input');
+
+// set RGB container
+const rgbContainer = document.createElement('div');
+
+// Create sliderInput button
+const sliderInput = document.createElement('input');
+
+//Create an H3 to display slider value
+const sliderValue = document.createElement('h3');
+
+// Create a clearButton
+const clearButton = document.createElement('button');
+
+// Set RGB Button
+function setRBGButton () {
+    makeRGBButton.setAttribute('id', 'randomRGB');
+    makeRGBButton.textContent = 'Rainbow';
+    sliderContainer.insertAdjacentElement('beforeend', makeRGBButton);    
+}
+
+// set RGB (Rainbow) button
+function makeRandomRGB () {
+    const r = Math.floor(Math.random() * 255);
+    const g = Math.floor(Math.random() * 255);
+    const b = Math.floor(Math.random() * 255);
+    gridContainer.addEventListener('mouseover', (e) => e.target.style.backgroundColor = 'rgb(' + r +',' + g + ',' + b + ')');
+}
+
+// Callback Function for Rainbow Button
+function callRandomRGB () {
+    gridContainer.addEventListener('mouseover', makeRandomRGB);
+}
+
+makeRGBButton.addEventListener('click', callRandomRGB);
+
+// sliderInput Fn
+function setSliderInput () {
+    sliderInput.type = 'range';
+    sliderInput.min = '8';
+    sliderInput.max = '64';
+    sliderInput.value = '16';
+    sliderContainer.insertAdjacentElement('afterbegin', sliderInput);
+    sliderInput.insertAdjacentElement("afterend", sliderValue);
+    sliderValue.textContent = `${sliderInput.value} x ${sliderInput.value}`;
+}
+
+// setRGB Attributes
+function setRGB() {
+    createLabel.setAttribute('for', 'rgbPicker');
+    createRGB.setAttribute('type', 'color');
+    createRGB.setAttribute('value', '#A020F0');
+    createRGB.setAttribute ('id', 'rgbPicker');
+    createRGB.setAttribute('name', 'rgbPicker');
+    createLabel.textContent = 'RGB Color: ';
+    rgbContainer.setAttribute('class', 'rgb-container');
+    sliderContainer.insertAdjacentElement('beforeend', rgbContainer);
+    rgbContainer.insertAdjacentElement("beforeend", createRGB);
+    rgbContainer.insertAdjacentElement('afterbegin', createLabel);
+}
+
+// Create random RGB color
+function createRGBButton () {
+    makeRGBButton.setAttribute('id', 'randomRGB');
+    makeRGBButton.textContent = 'Rainbow';
+    sliderContainer.insertAdjacentElement('beforeend', makeRGBButton);
+}
+
+// Assign Containers Attribute and insert it to the DOM
+function setContainersAttribute () {
+    mainContainer.className = 'main-container';
+    document.body.appendChild(mainContainer);
+    gridContainer.className = 'grid-container';
+    mainContainer.appendChild(gridContainer);
+    sliderContainer.className = 'slider-container';
+    mainContainer.insertAdjacentElement('afterbegin', sliderContainer);
+}
 
 // Create a div using JavaScript
 function createGrids (value) {
@@ -25,40 +100,22 @@ function createGrids (value) {
         gridSquares.className = 'grid-square';
         gridContainer.appendChild(gridSquares);
     }
-} 
-
-// Create sliderInput button
-const sliderInput = document.createElement('input');
-
-//Create a para to display slider value
-const sliderValue = document.createElement('h3');
-
-// sliderInput Fn
-function setSliderInput () {
-    sliderInput.type = 'range';
-    sliderInput.min = '8';
-    sliderInput.max = '64';
-    sliderInput.value = '16';
-    sliderContainer.append(sliderInput);
-    sliderInput.insertAdjacentElement("afterend", sliderValue);
-    sliderValue.textContent = `${sliderInput.value} x ${sliderInput.value}`;
 }
 
-
-// Intial Start Fn
-function defaultValue () {
+// Intial Start Fn with Immediately Invoked function expression (IIFE)
+const defaultValue = (function () {
+    setRGB();
+    setContainersAttribute();
     setSliderInput();
+    setRGB();
     createGrids(sliderInput.value);
-}
-
-defaultValue();
+    createRGBButton();
+}) ();
 
 // Clear Existing Grid when Slider Change
 function clearGridSquare (){
     const gridSquare = document.querySelectorAll('.grid-square');
-    gridSquare.forEach(grid => {
-        grid.remove();
-    });
+    gridSquare.forEach(grid => grid.remove());
 }
 
 // listenForSlider Fn
@@ -70,54 +127,37 @@ function listenForSlider () {
 
 sliderInput.addEventListener('change', listenForSlider);
 
-// Listen for mouseenter and hold any of the grid
-// const gridItems = document.querySelector('.grid-square');
-
+// generateRGB Fn
 gridContainer.addEventListener('mouseover', (e) => e.target.style.backgroundColor = createRGB.value);
 
-// When clear button is clicked
-// Remove existing grid with backgroundColor
+// Get the gridSquare Div
+// Check the div that contain style with backgroundColor Attribute
+// Remove all of them
+function gridItems () {
+    const gridItems = document.querySelectorAll('.grid-square');
+    gridItems.forEach(grid => grid.removeAttribute('style'));
+    createRGB.value = '#A020F0';
+}
+
 // Create a toolDiv
 const toolContainer = document.createElement('div');
 toolContainer.className = 'tool-container';
 mainContainer.insertAdjacentElement('afterend', toolContainer);
 
-// Create a clearButton
-const clearButton = document.createElement('button');
+
+// Assign class and text content to Clear Button
 clearButton.className = 'clear-button';
 clearButton.textContent = 'Clear';
 toolContainer.appendChild(clearButton);
 
-// Get the gridSquare Div
-function gridItems () {
-    const gridItems = document.querySelectorAll('.grid-square');
-    gridItems.forEach(grid => grid.removeAttribute('style'))
-}
 
+
+// Click on RGB color
+// get the picked color
+// gridContainer will change to the picked color
 clearButton.addEventListener('click', gridItems );
-// Check the div that contain style with backgroundColor Attribute
-// Remove all of them
-
-
-// Create an RGB picker
-const createLabel = document.createElement('label');
-const createRGB = document.createElement('input');
-
-// setRGB Attributes
-createLabel.setAttribute('for', 'rgbPicker');
-sliderContainer.insertAdjacentElement('beforeend', createLabel);
-createRGB.setAttribute('type', 'color');
-createRGB.setAttribute('value', '#A020F0');
-createRGB.setAttribute ('id', 'rgbPicker');
-createRGB.setAttribute('name', 'rgbPicker')
-createLabel.textContent = 'RGB Color: '
-sliderContainer.insertAdjacentElement("beforeend", createRGB);
-
-// Create a Black and white button
-
-
-
-
-
-
+createRGB.addEventListener('change', () => {
+    gridContainer.addEventListener('mouseover', e => e.target.style.backgroundColor = createRGB.value);
+    gridContainer.removeEventListener('mouseover', makeRandomRGB);
+});
 
